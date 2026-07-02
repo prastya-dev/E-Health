@@ -1,0 +1,84 @@
+body { 
+    font-family: Arial, sans-serif; 
+    background: #f0f2f5; 
+    padding: 20px; 
+    color: #333; 
+}
+
+.app-container { 
+    max-width: 900px; /* Diperlebar agar muat peta */
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    margin: 0 auto; 
+}
+
+h1, h3 { color: #4f46e5; margin-top: 0; }
+.pusat-info { background: #e0e7ff; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 0.9em; }
+.control-group { margin-bottom: 15px; padding: 10px; background: #f9fafb; border-radius: 5px; }
+input, select, button { padding: 8px; width: 100%; box-sizing: border-box; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+button { background: #4f46e5; color: white; border: none; cursor: pointer; font-weight: bold; margin-bottom: 5px;}
+button:hover { background: #4338ca; }
+
+.btn-hijau { background: #10b981; }
+.btn-hijau:hover { background: #059669; }
+.btn-kuning { background: #f59e0b; }
+.btn-kuning:hover { background: #d97706; }
+
+#outputBox { 
+    background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 5px; min-height: 80px; 
+    font-family: monospace; white-space: pre-wrap; margin-top: 15px; 
+}
+
+/* ================================================= */
+/* CSS PETA VISUAL (TIDAK PERLU DIPELAJARI UNTUK LOGIKA DASAR) */
+/* ================================================= */
+#graph-visualizer {
+    position: relative; 
+    min-height: 450px; 
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 5px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+#svg-layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+}
+
+.node-circle {
+    position: absolute; 
+    transform: translate(-50%, -50%);
+    z-index: 2; 
+    width: 45px; height: 45px; border-radius: 50%; background: #e2e8f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: bold; color: #475569;
+    transition: all 0.3s ease; border: 2px solid #cbd5e1; cursor: help;
+}
+
+.node-circle.visited { background: #fef08a; border-color: #eab308; }
+.node-circle.current { background: #3b82f6; color: white; border-color: #2563eb; transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); }
+.node-circle.path { background: #10b981; color: white; border-color: #059669; transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); }
+
+/* ================================================= */
+/* RESPONSIVITAS MOBILE (SMARTPHONE)                 */
+/* ================================================= */
+@media screen and (max-width: 600px) {
+    body { padding: 10px; }
+    .app-container { padding: 15px; border-radius: 0; }
+    
+    #graph-visualizer {
+        min-height: 350px; /* Peta tidak terlalu tinggi di HP */
+        padding: 5px;
+    }
+    
+    .node-circle {
+        width: 28px; 
+        height: 28px; 
+        font-size: 9px; /* Huruf lebih kecil agar muat */
+        border-width: 1px;
+    }
+}

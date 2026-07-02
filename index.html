@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedRoute - E-Health UNSIA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app-container">
+    <h1>MedRoute</h1>
+    <div class="pusat-info">Posisi Awal Ambulans: N0 - UNSIA (Universitas Siber Asia)</div>
+
+    <div class="control-group">
+        <h3>Cari Fasilitas Medis</h3>
+        <input type="text" id="inputCari" placeholder="Ketik faskes/layanan (Contoh: ICU, Apotek, MRI)">
+        <button onclick="pemicuCari()">Cari Layanan</button>
+    </div>
+
+    <div class="control-group">
+        <h3>Pengurutan Jarak Terdekat</h3>
+        <button onclick="pemicuUrut()" class="btn-hijau">Urutkan RS Terdekat dari UNSIA</button>
+    </div>
+
+    <div class="control-group">
+        <h3>Navigasi Rute Rujukan</h3>
+        <label for="pilihTujuan">Pilih RS Tujuan:</label>
+        <select id="pilihTujuan">
+            <option value="N1">RSUD Pasar Minggu</option>
+            <option value="N2">Aji Waras Klinik</option>
+            <option value="N3">Lamina Hospital</option>
+            <option value="N4">Kemang Medical Care Hospital</option>
+            <option value="N5">RS Murni Teguh Pejaten</option>
+            <option value="N6">RS Jakarta Medical Center</option>
+            <option value="N7">RSUD Jagakarsa</option>
+            <option value="N8">RS Marinir Cilandak</option>
+            <option value="N9">RSUD Jati Padang</option>
+        </select>
+        <button onclick="pemicuNavigasi('BFS')" style="margin-top: 10px;">Simulasikan Rute BFS</button>
+        <button onclick="pemicuNavigasi('DFS')" class="btn-kuning">Simulasikan Rute DFS</button>
+    </div>
+    <h3>Output Konsol Sistem:</h3>
+    <div id="outputBox">Sistem siap digunakan...</div>
+    <h3>Visual</h3>
+    <div id="graph-visualizer">
+        <svg id="svg-layer"></svg>
+    </div>
+
+    
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

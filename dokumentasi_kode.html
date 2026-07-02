@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Panduan MedRoute (Pemula)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; color: #333; max-width: 950px; margin: 0 auto; background: #f8fafc; }
+        .doc-container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        .label-js { background: #f59e0b; color: white; text-align: center; padding: 10px; font-weight: bold; border-radius: 8px; margin-bottom: 20px; font-size: 18px; letter-spacing: 2px; }
+        
+        h1 { color: #4f46e5; border-bottom: 3px solid #4f46e5; padding-bottom: 15px; text-align: center; margin-top: 0; }
+        h2 { color: #059669; margin-top: 40px; border-left: 5px solid #10b981; padding-left: 10px; background: #f0fdf4; padding: 10px; }
+        
+        .explanation { background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .contoh-dasar-teks { font-weight: bold; color: #f59e0b; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
+        
+        /* Pre simpel */
+        .pre-simple { background: #334155; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #f8fafc; margin-bottom: 20px;}
+        
+        /* CSS Untuk Pembedahan Syntax (Kode Asli) */
+        .code-box { background: #1e293b; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+        .code-row { display: flex; align-items: stretch; margin-bottom: 12px; }
+        .code-row:last-child { margin-bottom: 0; }
+        .c-code { flex: 0 0 45%; font-family: 'Courier New', Courier, monospace; color: #f8fafc; font-size: 14px; white-space: pre-wrap; padding-right: 10px; display: flex; align-items: center; }
+        .c-arrow { flex: 0 0 5%; font-size: 24px; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .c-detail { flex: 0 0 50%; font-size: 14px; color: #334155; padding: 10px 15px; border-radius: 6px; border-left: 5px solid; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        /* CSS Untuk Visualisasi Animasi Analog */
+        .visual-box { background: #f1f5f9; border: 2px dashed #cbd5e1; padding: 30px; border-radius: 8px; margin: 15px 0; text-align: center; overflow: hidden;}
+        .visual-title { font-weight: bold; color: #475569; margin-bottom: 25px; text-align: center; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
+        .flex-row { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
+        
+        /* Animasi BUBBLE SORT */
+        .box-sort { width: 70px; height: 70px; background: #3b82f6; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; position: relative; }
+        .anim-swap-left { animation: swapL 3s infinite alternate ease-in-out; background: #ef4444; }
+        .anim-swap-right { animation: swapR 3s infinite alternate ease-in-out; }
+        @keyframes swapL { 0%, 20% { transform: translateX(0) translateY(0); } 40%, 60% { transform: translateX(42px) translateY(-40px); } 80%, 100% { transform: translateX(85px) translateY(0); } }
+        @keyframes swapR { 0%, 20% { transform: translateX(0) translateY(0); } 40%, 60% { transform: translateX(-42px) translateY(40px); } 80%, 100% { transform: translateX(-85px) translateY(0); } }
+
+        /* Animasi QUEUE (BFS) */
+        .queue-container { display: flex; gap: 10px; background: #e2e8f0; padding: 15px; border-radius: 30px; width: 300px; justify-content: center; overflow: hidden; position: relative; height: 40px;}
+        .q-item { background: #10b981; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; position: absolute; }
+        .anim-q1 { animation: qMove1 4s infinite linear; } .anim-q2 { animation: qMove2 4s infinite linear; } .anim-q3 { animation: qMove3 4s infinite linear; }
+        @keyframes qMove1 { 0% { left: 65%; opacity: 1; } 50% { left: 35%; } 90% { left: 5%; opacity: 1; } 100% { left: -20%; opacity: 0; } }
+        @keyframes qMove2 { 0% { left: 95%; opacity: 0; } 10% { opacity: 1; } 50% { left: 65%; } 100% { left: 35%; opacity: 1; } }
+        @keyframes qMove3 { 0% { left: 125%; opacity: 0; } 50% { left: 95%; opacity: 0; } 60% { opacity: 1; } 100% { left: 65%; opacity: 1; } }
+
+        /* Animasi STACK (DFS) */
+        .stack-container { display: flex; flex-direction: column-reverse; gap: 5px; width: 120px; background: #e2e8f0; padding: 15px; border-radius: 5px 5px 0 0; border-bottom: 8px solid #475569; margin: 0 auto; height: 150px; justify-content: flex-start; position: relative;}
+        .s-item { background: #8b5cf6; color: white; padding: 10px; text-align: center; border-radius: 4px; width: 100px; font-weight: bold; position: absolute; bottom: 15px; left: 10px; }
+        .anim-s1 { bottom: 15px; } .anim-s2 { bottom: 65px; } .anim-s3 { animation: stackInOut 3s infinite ease-in-out; }
+        @keyframes stackInOut { 0% { bottom: 180px; opacity: 0; } 30%, 70% { bottom: 115px; opacity: 1; } 100% { bottom: 180px; opacity: 0; } }
+
+        /* RESPONSIVE MOBILE */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .doc-container { padding: 15px; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; }
+            
+            /* Code Responsiveness */
+            .code-row { flex-direction: column; align-items: stretch; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; margin-bottom: 20px;}
+            .c-code { width: 100%; padding-right: 0; margin-bottom: 5px;}
+            .c-arrow { transform: rotate(90deg); margin: 5px auto 10px auto; font-size: 24px;}
+            .c-detail { width: 100%; }
+            
+            /* Visual Responsiveness */
+            .flex-row { flex-direction: column; text-align: center; }
+            .visual-box { padding: 15px; }
+            .queue-container { width: 100%; max-width: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        
+        <div class="label-js">⚠️ APLIKASI INI DIPROGRAM MENGGUNAKAN BAHASA: JAVASCRIPT</div>
+        
+        <h1>Panduan Syntax Kode</h1>
+        <p style="text-align: center; color: #64748b;">Setiap konsep di bawah ini dilengkapi contoh logika dasar, barisan kode asli beserta anak panah rincian</p>
+
+        <!-- BAGIAN 1: ARRAY -->
+        <h2>1. Penyimpanan Data (Array & Object)</h2>
+        <div class="contoh-dasar-teks">Contoh Paling Sederhana:</div>
+        <pre class="pre-simple">// Array (Daftar)
+let daftarBuah = ["Apel", "Mangga"];
+
+// Object (Kartu Profil)
+let siswa = { nama: "Budi", umur: 20 };</pre>
+
+        <div class="explanation">
+            <strong>Array</strong> itu seperti <em>daftar belanjaan</em> yang memanjang ke bawah. <strong>Object</strong> itu seperti <em>KTP</em>. Pada kode aplikasi kita, kita membuat daftar (Array) yang isinya adalah kumpulan profil lengkap KTP Rumah Sakit (Object).
+        </div>
+        
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">const dataFaskes = [</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    <b>const</b>: Membuat variabel yang tidak boleh dihapus.<br><b>[ ]</b>: Menandakan tipe data berbentuk <b>Array</b> (Daftar).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  { nama: "RSUD Pasar Minggu", jarak: 0.85 },</div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    <b>{ }</b>: Membuka data <b>Object</b>. Kita menyimpan data nama (teks) dan data jarak (angka) rumah sakit ke-1.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  { nama: "Aji Waras Klinik", jarak: 1.8 }</div>
+                <div class="c-arrow" style="color: #c4b5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #c4b5fd; background: #f5f3ff;">
+                    Data rumah sakit ke-2. Tiap object selalu dipisahkan oleh tanda koma (,).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">];</div>
+                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
+                    Tanda tutup kurung siku <b>]</b> menandakan daftar rumah sakit telah ditutup/selesai.
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 2: GRAPH -->
+        <h2>2. Peta Sambungan Jalan (Graph)</h2>
+        <div class="contoh-dasar-teks">Contoh Paling Sederhana:</div>
+        <pre class="pre-simple">let jalan = {
+    "Rumah": ["Pasar", "Sekolah"]
+};</pre>
+
+        <div class="explanation">
+            <strong>Graph (Graf)</strong> adalah cara komputer melihat persimpangan jalan Google Maps. Komputer membacanya seperti ini: Jika saya berdiri di titik "Rumah", maka saya hanya punya 2 rute jalan yang bisa dilewati, yaitu rute menuju "Pasar" atau rute menuju "Sekolah".
+        </div>
+        
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">const graphPeta = {</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    Membuka Object utama khusus untuk menyimpan kerangka peta rute persimpangan.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  "J1": ["N0", "J2", "J5", "J7"]</div>
+                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
+                    <b>"J1"</b> adalah kunci posisi berdiri sekarang. Di sebelah kanannya adalah Array tujuan lokasi persimpangan yang nyambung (terhubung) ke J1.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">};</div>
+                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
+                    Tanda tutup Object peta.
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 3: PENCARIAN Teks -->
+        <h2>3. Algoritma Pencarian Teks (Linear Search)</h2>
+        <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
+        <pre class="pre-simple">let kalimat = "Rumah Sakit";
+if (kalimat.includes("Sakit")) {
+    console.log("Berhasil ditemukan!");
+}</pre>
+        <div class="explanation">
+            Pencarian "Linear" artinya komputer membaca teks berurutan dari baris 1 sampai baris terakhir, persis seperti guru mencari nama murid di buku presensi absen sekolah.
+        </div>
+        
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">function searchingLayanan(kataKunci) {</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    <b>function</b>: Membuka fungsi pencarian. <b>kataKunci</b> adalah tulisan yang diketik oleh pengguna web.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  return dataFaskes.filter(rs => </div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    <b>.filter()</b>: Mengecek seluruh Array <code>dataFaskes</code> dan membuang yang salah (menyaring data yang benar saja).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">    rs.layanan.some(l => l.includes(kataKunci))</div>
+                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
+                    <b>.some() & .includes()</b>: Apakah dari daftar layanan RS ini, ada teks yang <b>mirip (include)</b> dengan kataKunci?
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  );<br>}</div>
+                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
+                    Tutup proses penyaringan dan kembalikan hasilnya.
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 4: BUBBLE SORT -->
+        <h2>4. Mengurutkan Jarak (Bubble Sort)</h2>
+        <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
+        <pre class="pre-simple">if (Kotak_Kiri > Kotak_Kanan) {
+    // Tukar posisi mereka berdua!
+}</pre>
+
+        <div class="explanation">
+            Komputer membandingkan dua kotak bersebelahan. Kalau kotak KIRI ternyata nilainya lebih JAUH dari kotak KANAN, maka posisi mereka <strong>DITUKAR</strong>. Yang besar (jauh) akan terus ditendang ke arah ujung barisan, mirip gelembung udara di air (Bubble).
+        </div>
+
+        <div class="visual-box">
+            <div class="visual-title">🔴 Animasi Bertukar Posisi (Swap)</div>
+            <div class="flex-row" style="height: 120px;">
+                <div class="box-sort anim-swap-left">5 Km<br><small>(Lebih Jauh)</small></div>
+                <div class="box-sort anim-swap-right" style="background:#10b981;">2 Km<br><small>(Lebih Dekat)</small></div>
+            </div>
+            <div style="font-size: 12px; color: #64748b; margin-top: 10px;">Perhatikan bagaimana 5 Km (Kiri) yang lebih berat ditukar silang ke Kanan.</div>
+        </div>
+
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">if (arr[j].jarak > arr[j + 1].jarak) {</div>
+                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
+                    <b>if ( > )</b>: Mengecek apakah kotak bagian Kiri (j) jaraknya lebih besar/jauh dari kotak Kanan sebelahnya (j + 1).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  let temp = arr[j];</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    <b>temp</b>: Variabel kantong cadangan. Mengamankan isi kotak Kiri supaya tidak hilang tertimpa.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  arr[j] = arr[j + 1];</div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    Pindahkan isi kotak Kanan (j + 1) ke tempat/meja kotak Kiri (j).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  arr[j + 1] = temp;</div>
+                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
+                    Pindahkan kembali isi kantong cadangan (temp) ke tempat kotak Kanan. Tukar silang (swap) sukses!
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 5: BREADTH-FIRST SEARCH (BFS) -->
+        <h2>5. Pencarian Melebar (BFS - Breadth First Search)</h2>
+        <div class="explanation">
+            Komputer mencari jalan menggunakan sistem <strong>Antrean Kasir (Queue)</strong>. Titik persimpangan yang dimasukkan ke antrean lebih dulu, pasti akan dicek lebih dulu (Keluar dari depan). Hasilnya, komputer mengecek rute terdekat secara melebar ke segala arah bak gelombang air.
+        </div>
+
+        <div class="visual-box">
+            <div class="visual-title">🟢 Animasi Antrean (First-In, First-Out)</div>
+            <div class="flex-row">
+                <div style="font-weight:bold; color:#ef4444; margin: 10px 0;">DICEK DULUAN<br>⬅️ (Keluar Depan)</div>
+                <div class="queue-container">
+                    <div class="q-item anim-q1">Area A</div>
+                    <div class="q-item anim-q2">Area B</div>
+                    <div class="q-item anim-q3" style="background:#3b82f6;">Area C</div>
+                </div>
+                <div style="font-weight:bold; color:#3b82f6; margin: 10px 0;">MASUK ANTRIAN<br>⬅️ (Area Baru Belakang)</div>
+            </div>
+        </div>
+
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">let antrean = [[start]];</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    Membuat keranjang Array kosong untuk sistem mengantre, dan langsung memasukkan posisi awal berdiri (start).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">while (antrean.length > 0) {</div>
+                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
+                    <b>while</b>: Memerintahkan komputer mengulangi pencarian tanpa henti <b>selama</b> antrean tidak kosong.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  let jalur = antrean.shift();</div>
+                <div class="c-arrow" style="color: #f9a8d4;">➔</div>
+                <div class="c-detail" style="border-left-color: #f9a8d4; background: #fdf2f8;">
+                    <b>.shift()</b>: Mengeluarkan/mencabut rute dari barisan <b>PALING DEPAN</b> untuk dicek apakah itu tujuan kita.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  antrean.push(tetangga);</div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    <b>.push()</b>: Kalau rute tadi salah (belum ketemu), maka temuan persimpangan jalan di depannya dimasukkan ke antrean <b>PALING BELAKANG</b> untuk dicek besok-besok.
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 6: DEPTH-FIRST SEARCH (DFS) -->
+        <h2>6. Pencarian Mendalam (DFS - Depth First Search)</h2>
+        <div class="explanation">
+            Berbeda dengan BFS yang menyebar, DFS itu ibarat menerobos masuk ke dalam gang secara lurus terus sampai mentok (ujung). Kalau buntu, baru mundur. Komputer mencatat rute ini dengan sistem <strong>Tumpukan Piring (Stack)</strong>. Piring yang ditumpuk terakhir di atas, akan diambil duluan (Keluar mundur).
+        </div>
+
+        <div class="visual-box">
+            <div class="visual-title">🟣 Animasi Tumpukan Piring (Last-In, First-Out)</div>
+            <div class="flex-row">
+                <div style="font-weight:bold; color:#8b5cf6; text-align:right;">Maju Terus (Masuk Piring) ⬇️<br><br>Mundur Buntu (Ambil Piring) ⬆️</div>
+                <div class="stack-container">
+                    <div class="s-item anim-s1">Jalan A</div>
+                    <div class="s-item anim-s2">Jalan B</div>
+                    <div class="s-item anim-s3" style="background:#ef4444;">Ujung Gang C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">function ruteDFS(titikAwal) {</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    Membuka fungsi DFS untuk pertama kalinya (misalnya saat klik tombol).
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  for (let t of tetangga) {</div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    <b>for</b>: Memutar roda untuk memeriksa jalan cabang di persimpangan ini satu-satu.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">    let hasil = ruteDFS(t);</div>
+                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
+                    <b>REKURSIF</b>: Ini ajaib. Fungsi ini ternyata memanggil namanya <i>sendiri</i> dari dalam untuk masuk ke cabang gang yang barusan ditemukan. Proses lurus akan terus menumpuk di atas.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  }<br>  return null;</div>
+                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
+                    Jika masuk perulangan ternyata buntu, kembalikan <b>null</b> (kosong). Saat menerima 'null', komputer akan otomatis mundur 1 langkah ke atas tumpukan piring untuk mengecek gang cabang lainnya.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- BAGIAN 7: JEMBATAN DOM (UI) -->
+        <h2>7. Tombol dan Antarmuka (DOM / UI Logic)</h2>
+        <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
+        <pre class="pre-simple">let layarTV = document.getElementById("layarOutput");
+
+// Beri perintah ke layar TV
+layarTV.innerHTML = "Tombol Berhasil Ditekan!";</pre>
+
+        <div class="explanation">
+            JavaScript membutuhkan jembatan untuk bisa berinteraksi dengan layar web HTML. <code>getElementById</code> ibarat *remote control*. Saat Anda memencet tombol, JavaScript membalasnya dengan mencetak tulisan ke layar melalui syntax <code>innerHTML</code>.
+        </div>
+
+        <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
+        <div class="code-box">
+            <div class="code-row">
+                <div class="c-code">const box = document.getElementById("outputBox");</div>
+                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
+                    <b>getElementById</b>: JavaScript mencari kotak di HTML yang memiliki ID `outputBox` dan mengendalikannya memakai remote bernama <code>box</code>.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">function pemicuUrut() {</div>
+                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
+                    Fungsi ini akan tertembak (terpicu) ketika tombol 'Urutkan' ditekan di layar web.
+                </div>
+            </div>
+            <div class="code-row">
+                <div class="c-code">  box.innerHTML = "Berhasil Diurutkan!";<br>}</div>
+                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
+                    <b>.innerHTML</b>: Kita menggunakan remote `box` untuk menuliskan teks langsung masuk ke dalam layar website secara real-time.
+                </div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: #64748b; margin-top: 50px; font-weight: bold; border-top: 1px dashed #cbd5e1; padding-top: 20px;">
+            Note: "Visual Peta 2D" sengaja tidak dibahas karena berada di luar materi struktur data dan murni berfungsi sebagai visualisasi metode DFS dan BFS.
+        </p>
+
+    </div>
+</body>
+</html>
