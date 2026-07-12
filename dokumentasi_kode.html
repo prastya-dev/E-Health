@@ -40,8 +40,6 @@
         /* 1. ANIMASI BUBBLE SORT (STIKMAN BERPIKIR) */
         /* ========================================= */
         .bubble-stage { position: relative; width: 340px; height: 140px; margin: 0 auto; border-bottom: 4px solid #cbd5e1; }
-        
-        /* Kotak Angka */
         .b-circle { width: 40px; height: 40px; border-radius: 8px; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; position: absolute; bottom: 0; z-index: 2; box-shadow: 0 4px 6px rgba(0,0,0,0.2); left: 0;}
         
         .bc_val_3 { animation: b3_anim 24s infinite; }
@@ -51,12 +49,10 @@
         .bc_val_6 { background: #ef4444; animation: b6_anim 24s infinite; }
         .bc_val_4 { animation: b4_anim 24s infinite; }
 
-        /* Wadah Stikman Bubble Sort */
         .sm-wrapper { position: absolute; bottom: -5px; left: -10px; width: 100px; height: 100px; z-index: 1; animation: stickmanMove 24s infinite; }
         .arm-l { transform-origin: 50px 45px; animation: armL 24s infinite; }
         .arm-r { transform-origin: 50px 45px; animation: armR 24s infinite; }
 
-        /* Keyframe Stikman: Memeriksa barisan 2 kali */
         @keyframes stickmanMove {
             0%, 7.5% { transform: translateX(0); opacity: 1; }
             8.33%, 15.5% { transform: translateX(60px); opacity: 1; }
@@ -72,7 +68,6 @@
             91%, 100% { transform: translateX(240px); opacity: 0; }
         }
 
-        /* Lengan Kiri */
         @keyframes armL {
             0%, 0.9% { transform: rotate(0deg); }
             1%, 6% { transform: rotate(140deg); }
@@ -97,7 +92,6 @@
             90.33%, 100% { transform: rotate(0deg); }
         }
 
-        /* Lengan Kanan */
         @keyframes armR {
             0%, 0.9% { transform: rotate(0deg); }
             1%, 6% { transform: rotate(-140deg); }
@@ -122,7 +116,6 @@
             90.33%, 100% { transform: rotate(0deg); }
         }
 
-        /* Pergerakan Kotak Angka (3, 1, 2, 5, 6, 4) */
         @keyframes b3_anim {
             0%, 0.9% { transform: translate(0, 0); opacity: 1; }
             1% { transform: translate(0, -45px); }
@@ -197,34 +190,39 @@
         }
 
         /* ========================================= */
-        /* 2. ANIMASI BFS (STIKMAN KASIR/ANTREAN)  */
+        /* LAYOUT FLEX UNTUK BFS & DFS               */
         /* ========================================= */
-        .bfs-stage { position: relative; width: 340px; height: 120px; margin: 0 auto; border-bottom: 4px solid #cbd5e1; }
-        .bfs-sm { position: absolute; left: 0; bottom: -5px; width: 80px; height: 80px; }
+        .flex-container-layout { display: flex; justify-content: space-around; flex-wrap: wrap; align-items: center; gap: 20px; }
+
+        /* ========================================= */
+        /* 2. ANIMASI BFS (ANTREAN & LABIRIN KANAN)  */
+        /* ========================================= */
+        .bfs-stage { position: relative; width: 220px; height: 160px; margin: 0 auto; border-bottom: 4px solid #cbd5e1; }
+        .bfs-sm { position: absolute; left: 10px; bottom: -5px; width: 80px; height: 80px; }
         .q-box { width: 60px; height: 35px; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; position: absolute; bottom: 10px; border-radius: 6px; font-weight: bold; font-size:12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
         .qa { animation: qa-anim 9s infinite; }
         .qb { animation: qb-anim 9s infinite; }
         .qc { animation: qc-anim 9s infinite; }
 
         @keyframes qa-anim {
-            0%, 5% { left: 100px; opacity: 1; }
-            10%, 20% { left: 45px; opacity: 1; bottom: 10px;}
-            25%, 30% { left: 45px; opacity: 0; bottom: -20px;}
+            0%, 5% { left: 150px; opacity: 1; }
+            10%, 20% { left: 90px; opacity: 1; bottom: 10px;}
+            25%, 30% { left: 90px; opacity: 0; bottom: -20px;}
             31%, 100% { opacity: 0; }
         }
         @keyframes qb-anim {
-            0%, 5% { left: 170px; opacity: 1; }
-            10%, 35% { left: 100px; opacity: 1; }
-            40%, 50% { left: 45px; opacity: 1; bottom: 10px;}
-            55%, 60% { left: 45px; opacity: 0; bottom: -20px;}
+            0%, 5% { left: 220px; opacity: 1; }
+            10%, 35% { left: 150px; opacity: 1; }
+            40%, 50% { left: 90px; opacity: 1; bottom: 10px;}
+            55%, 60% { left: 90px; opacity: 0; bottom: -20px;}
             61%, 100% { opacity: 0; }
         }
         @keyframes qc-anim {
-            0%, 5% { left: 240px; opacity: 1; }
-            10%, 35% { left: 170px; opacity: 1; }
-            40%, 65% { left: 100px; opacity: 1; }
-            70%, 80% { left: 45px; opacity: 1; bottom: 10px;}
-            85%, 90% { left: 45px; opacity: 0; bottom: -20px;}
+            0%, 5% { left: 290px; opacity: 1; }
+            10%, 35% { left: 220px; opacity: 1; }
+            40%, 65% { left: 150px; opacity: 1; }
+            70%, 80% { left: 90px; opacity: 1; bottom: 10px;}
+            85%, 90% { left: 90px; opacity: 0; bottom: -20px;}
             91%, 100% { opacity: 0; }
         }
         .bfs-arm-r { transform-origin: 40px 36px; animation: bfs-arm-anim 9s infinite; }
@@ -238,35 +236,62 @@
             85%, 100% { transform: rotate(0); }
         }
 
+        /* Labirin BFS */
+        .bfs-maze-container { position: relative; width: 160px; height: 160px; margin: 0 auto; }
+        .bfs-stickman {
+            position: absolute; width: 20px; height: 20px; margin-left: -10px; margin-top: -10px;
+            z-index: 10; animation: bfs-maze-anim 15s linear infinite;
+        }
+
+        @keyframes bfs-maze-anim {
+            0% { left: 75px; top: 150px; }
+            8% { left: 75px; top: 100px; } 
+            16% { left: 33px; top: 100px; } /* Cek Kiri */
+            19% { left: 33px; top: 100px; } /* Jeda Buntu */
+            27% { left: 75px; top: 100px; } /* Kembali ke persimpangan */
+            35% { left: 110px; top: 100px; } /* Cek Kanan (lanjut ke atas) */
+            40% { left: 110px; top: 60px; } /* Naik ke persimpangan 2 */
+            48% { left: 63px; top: 60px; } /* Cek Kiri */
+            51% { left: 63px; top: 60px; } /* Jeda Buntu */
+            59% { left: 110px; top: 60px; } /* Kembali ke persimpangan 2 */
+            65% { left: 110px; top: 30px; } /* TARGET KANAN ATAS */
+            65%, 95% { left: 110px; top: 30px; opacity: 1; transform: scale(1); }
+            96%, 98% { left: 110px; top: 30px; opacity: 0; transform: scale(1.5); }
+            99% { left: 75px; top: 150px; opacity: 0; transform: scale(1); }
+            100% { left: 75px; top: 150px; opacity: 1; }
+        }
+
         /* ========================================= */
-        /* 3. ANIMASI DFS (STIKMAN TUMPUKAN BARANG)  */
+        /* 3. ANIMASI DFS (STIKMAN TUMPUKAN & MAZE)  */
         /* ========================================= */
-        .dfs-stage { position: relative; width: 300px; height: 160px; margin: 0 auto; border-bottom: 4px solid #cbd5e1;}
-        .dfs-sm { position: absolute; left: 50px; bottom: -5px; width: 80px; height: 80px; }
-        .s-box { width: 80px; height: 25px; background: #8b5cf6; color: white; display: flex; align-items: center; justify-content: center; position: absolute; left: 130px; border-radius: 4px; font-weight: bold; font-size:12px; opacity: 0; box-shadow: 0 -2px 4px rgba(0,0,0,0.2);}
+        
+        /* A. Stack DFS (Kiri) */
+        .dfs-stage { position: relative; width: 220px; height: 160px; margin: 0 auto; border-bottom: 4px solid #cbd5e1;}
+        .dfs-sm { position: absolute; left: 20px; bottom: -5px; width: 80px; height: 80px; }
+        .s-box { width: 70px; height: 25px; background: #8b5cf6; color: white; display: flex; align-items: center; justify-content: center; position: absolute; left: 100px; border-radius: 4px; font-weight: bold; font-size:11px; opacity: 0; box-shadow: 0 -2px 4px rgba(0,0,0,0.2);}
         .sa { animation: sa-anim 12s infinite; }
         .sb { animation: sb-anim 12s infinite; }
         .sc { animation: sc-anim 12s infinite; }
 
         @keyframes sa-anim {
-            0%, 5% { bottom: 35px; left: 85px; opacity: 0; }
-            10% { bottom: 35px; left: 85px; opacity: 1; }
-            15%, 85% { bottom: 0px; left: 130px; opacity: 1; }
-            90% { bottom: 35px; left: 85px; opacity: 1; }
+            0%, 5% { bottom: 35px; left: 55px; opacity: 0; }
+            10% { bottom: 35px; left: 55px; opacity: 1; }
+            15%, 85% { bottom: 0px; left: 100px; opacity: 1; }
+            90% { bottom: 35px; left: 55px; opacity: 1; }
             95%, 100% { opacity: 0; }
         }
         @keyframes sb-anim {
-            0%, 20% { bottom: 35px; left: 85px; opacity: 0; }
-            25% { bottom: 35px; left: 85px; opacity: 1; }
-            30%, 70% { bottom: 25px; left: 130px; opacity: 1; } 
-            75% { bottom: 35px; left: 85px; opacity: 1; }
+            0%, 20% { bottom: 35px; left: 55px; opacity: 0; }
+            25% { bottom: 35px; left: 55px; opacity: 1; }
+            30%, 70% { bottom: 25px; left: 100px; opacity: 1; } 
+            75% { bottom: 35px; left: 55px; opacity: 1; }
             80%, 100% { opacity: 0; }
         }
         @keyframes sc-anim {
-            0%, 35% { bottom: 35px; left: 85px; opacity: 0; }
-            40% { bottom: 35px; left: 85px; opacity: 1; }
-            45%, 55% { bottom: 50px; left: 130px; opacity: 1; }
-            60% { bottom: 35px; left: 85px; opacity: 1; }
+            0%, 35% { bottom: 35px; left: 55px; opacity: 0; }
+            40% { bottom: 35px; left: 55px; opacity: 1; }
+            45%, 55% { bottom: 50px; left: 100px; opacity: 1; }
+            60% { bottom: 35px; left: 55px; opacity: 1; }
             65%, 100% { opacity: 0; }
         }
 
@@ -287,6 +312,45 @@
             90%, 100% { transform: rotate(0); }
         }
 
+        /* B. Maze DFS (Kanan) */
+        .maze-container { position: relative; width: 160px; height: 160px; margin: 0 auto; }
+        .maze-svg { width: 100%; height: 100%; }
+        
+        .maze-stickman {
+            position: absolute; width: 20px; height: 20px; margin-left: -10px; margin-top: -10px;
+            z-index: 10; animation: dfs-maze-anim 20s linear infinite;
+        }
+
+        @keyframes dfs-maze-anim {
+            0% { left: 75px; top: 150px; }
+            4% { left: 75px; top: 130px; } 
+            8% { left: 75px; top: 90px; }
+            11% { left: 40px; top: 90px; } 
+            15% { left: 40px; top: 50px; } 
+            17% { left: 40px; top: 50px; } 
+            21% { left: 40px; top: 90px; } 
+            24% { left: 40px; top: 110px; } 
+            26% { left: 40px; top: 110px; } 
+            29% { left: 40px; top: 90px; } 
+            32% { left: 75px; top: 90px; } 
+            37% { left: 75px; top: 40px; } 
+            41% { left: 40px; top: 40px; } 
+            43% { left: 40px; top: 40px; } 
+            47% { left: 75px; top: 40px; } 
+            50% { left: 110px; top: 40px; } 
+            52% { left: 110px; top: 60px; } 
+            54% { left: 110px; top: 60px; } 
+            56% { left: 110px; top: 40px; } 
+            59% { left: 75px; top: 40px; } 
+            64% { left: 75px; top: 90px; } 
+            68% { left: 75px; top: 130px; } 
+            72% { left: 110px; top: 130px; } 
+            72%, 95% { left: 110px; top: 130px; opacity: 1; transform: scale(1); } 
+            96%, 98% { left: 110px; top: 130px; opacity: 0; transform: scale(1.5); }
+            99% { left: 75px; top: 150px; opacity: 0; transform: scale(1); }
+            100% { left: 75px; top: 150px; opacity: 1; }
+        }
+
         /* RESPONSIVE MOBILE */
         @media (max-width: 600px) {
             body { padding: 10px; }
@@ -298,6 +362,8 @@
             .c-arrow { transform: rotate(90deg); margin: 5px auto 10px auto;}
             .c-detail { width: 100%; }
             .visual-box { padding: 15px; }
+            /* Membuat container BFS & DFS menjadi susunan atas bawah di mobile */
+            .flex-container-layout { flex-direction: column; gap: 40px; }
         }
     </style>
 </head>
@@ -308,7 +374,6 @@
         
         <h1>Panduan Syntax Kode</h1>
 
-        <!-- BAGIAN TAMBAHAN DARI PENGGUNA: FULL CODE JAVASCRIPT -->
         <details>
             <summary>KLIK UNTUK MELIHAT FULL SOURCE CODE JAVASCRIPT</summary>
             <div class="details-content">
@@ -460,7 +525,6 @@ function pemicuNavigasi(metode) {
 
     if (hasilCari) {
         box.innerHTML = `&lt;strong&gt;[Metode ${metode}]&lt;/strong&gt;&lt;br&gt;Sedang menyimulasikan algoritma di peta...`;
-        // Oper operan data ke mesin animasi yang terpisah di bawah
         mainkanAnimasiPeta(hasilCari.jejakVisual, hasilCari.ruteAsli, metode, namaTujuan);
     } else {
         box.innerHTML = `[Metode ${metode}] Rute tidak ditemukan.`;
@@ -596,7 +660,7 @@ if (kalimat.includes("Sakit")) {
             </div>
         </div>
 
-        <!-- BAGIAN 4: BUBBLE SORT (DIPERBARUI DENGAN STIKMAN BERPIKIR) -->
+        <!-- BAGIAN 4: BUBBLE SORT -->
         <h2>4. Mengurutkan Jarak (Bubble Sort)</h2>
         <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
         <pre class="pre-simple">if (Kotak_Kiri &gt; Kotak_Kanan) {
@@ -614,14 +678,10 @@ if (kalimat.includes("Sakit")) {
                 <!-- SVG Karakter Stikman Bubble Sort -->
                 <div class="sm-wrapper">
                     <svg viewBox="0 0 100 100" width="100%" height="100%">
-                        <!-- Kepala -->
                         <circle cx="50" cy="25" r="10" fill="none" stroke="#475569" stroke-width="4"/>
-                        <!-- Badan -->
                         <line x1="50" y1="35" x2="50" y2="65" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <!-- Kaki -->
                         <line x1="50" y1="65" x2="35" y2="90" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
                         <line x1="50" y1="65" x2="65" y2="90" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <!-- Lengan Animasi -->
                         <g class="arm-l">
                             <line x1="50" y1="45" x2="25" y2="70" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
                         </g>
@@ -630,8 +690,6 @@ if (kalimat.includes("Sakit")) {
                         </g>
                     </svg>
                 </div>
-
-                <!-- Enam Lingkaran Angka dengan urutan 3, 1, 2, 5, 6, 4 -->
                 <div class="b-circle bc_val_3">3</div>
                 <div class="b-circle bc_val_1">1</div>
                 <div class="b-circle bc_val_2">2</div>
@@ -677,38 +735,90 @@ if (kalimat.includes("Sakit")) {
             </div>
         </div>
 
-        <!-- BAGIAN 5: BREADTH-FIRST SEARCH (BFS) -->
+        <!-- BAGIAN 5: BFS -->
         <h2>5. Pencarian Melebar (BFS - Breadth First Search)</h2>
         <div class="explanation">
-            Komputer mencari jalan menggunakan sistem <strong>Antrean Kasir (Queue)</strong>. Titik persimpangan yang dimasukkan ke antrean lebih dulu, pasti akan dicek lebih dulu (Keluar dari depan). Hasilnya, komputer mengecek rute terdekat secara melebar ke segala arah bak gelombang air.
+            Komputer mencari jalan menggunakan sistem <strong>Antrean Kasir (Queue)</strong>. Titik persimpangan yang dimasukkan ke antrean lebih dulu, pasti akan dicek lebih dulu (Keluar dari depan). Hasilnya, komputer mengecek rute terdekat secara melebar (per level/cabang terdekat) bak gelombang air.
         </div>
 
         <div class="visual-box">
-            <div class="visual-title">Animasi Antrean Kasir (First-In, First-Out)</div>
+            <div class="visual-title">Animasi Pencarian Melebar (BFS)</div>
             
-            <div class="bfs-stage">
-                <!-- SVG Stikman Kasir -->
-                <div class="bfs-sm">
-                    <svg viewBox="0 0 80 80" width="100%" height="100%">
-                        <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
-                        <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <g class="bfs-arm-r">
-                            <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        </g>
-                    </svg>
+            <div class="flex-container-layout">
+                <!-- A. Animasi Antrean Queue (Kiri) -->
+                <div>
+                    <div style="font-weight:bold; color:#10b981; margin-bottom: 10px; font-size:14px;">1. Memori Antrean (Queue)</div>
+                    <div class="bfs-stage">
+                        <div class="bfs-sm">
+                            <svg viewBox="0 0 80 80" width="100%" height="100%">
+                                <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
+                                <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <g class="bfs-arm-r">
+                                    <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="q-box qa">Jalan A</div>
+                        <div class="q-box qb">Jalan B</div>
+                        <div class="q-box qc">Jalan C</div>
+                    </div>
                 </div>
 
-                <!-- Kotak Antrean -->
-                <div class="q-box qa">Jalan A</div>
-                <div class="q-box qb">Jalan B</div>
-                <div class="q-box qc">Jalan C</div>
+                <!-- B. Animasi Maze Labirin BFS (Kanan) -->
+                <div>
+                    <div style="font-weight:bold; color:#3b82f6; margin-bottom: 10px; font-size:14px;">2. Visualisasi Rute Peta (Kanan Atas)</div>
+                    <div class="bfs-maze-container">
+                        <!-- Labirin Dasar SVG -->
+                        <svg class="maze-svg" viewBox="0 0 150 160">
+                            <!-- Titik Tujuan (Kanan Atas) -->
+                            <circle cx="110" cy="20" r="10" fill="#10b981" />
+                            <text x="110" y="25" font-size="9" font-weight="bold" fill="#10b981" text-anchor="middle">TUJUAN</text>
+                            
+                            <!-- Jalanan Labirin BFS (Terputus-putus) -->
+                            <path d="M 75 160 L 75 100" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 75 100 L 30 100" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 75 100 L 110 100" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 110 100 L 110 60" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 110 60 L 60 60" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 110 60 L 110 30" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            
+                            <!-- Indikator Persimpangan (Logo T & Siku) -->
+                            <g stroke="#334155" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="miter">
+                                <!-- T di 75,100 (Bawah belah Kiri/Kanan) -->
+                                <path d="M 70 97 L 80 97 M 75 97 L 75 105" />
+                                <!-- Siku di 110,100 (Dari Kiri belok Atas) -->
+                                <path d="M 105 103 L 113 103 L 113 95" />
+                                <!-- T di 110,60 (Dari Bawah belah Kiri/Atas) -->
+                                <path d="M 113 55 L 113 65 M 113 60 L 105 60" />
+                            </g>
+
+                            <!-- Indikator Jalan Buntu (Garis Merah Tipis) -->
+                            <g stroke="#ef4444" stroke-width="3" stroke-linecap="round">
+                                <line x1="33" y1="93" x2="33" y2="107" /> <!-- Buntu Kiri 30,100 -->
+                                <line x1="63" y1="53" x2="63" y2="67" /> <!-- Buntu Kiri Atas 60,60 -->
+                            </g>
+                        </svg>
+
+                        <!-- Stikman Biru BFS Menyusuri Labirin -->
+                        <div class="bfs-stickman">
+                            <svg viewBox="0 0 80 80" width="100%" height="100%">
+                                <circle cx="40" cy="20" r="10" fill="none" stroke="#3b82f6" stroke-width="8"/>
+                                <line x1="40" y1="30" x2="40" y2="55" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="55" x2="20" y2="75" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="55" x2="60" y2="75" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="35" x2="15" y2="50" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="35" x2="65" y2="50" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div style="font-size: 13px; color: #64748b; margin-top: 15px;">
-                Stikman mengambil dan memeriksa data rute yang datang lebih awal (paling depan) dari barisan antrean.
+            <div style="font-size: 13px; color: #64748b; margin-top: 15px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                Stikman (biru) menelusuri secara merata dari titik awal. Ia mengecek seluruh cabang yang terdekat satu-persatu (kiri lalu kanan).<br>Jika belum bertemu tujuan, barulah ia melangkah lebih dalam ke level persimpangan berikutnya secara bertahap hingga menemukan tujuan di kanan atas.
             </div>
         </div>
 
@@ -744,38 +854,96 @@ if (kalimat.includes("Sakit")) {
             </div>
         </div>
 
-        <!-- BAGIAN 6: DEPTH-FIRST SEARCH (DFS) -->
+        <!-- BAGIAN 6: DFS -->
         <h2>6. Pencarian Mendalam (DFS - Depth First Search)</h2>
         <div class="explanation">
-            Berbeda dengan BFS yang menyebar, DFS itu ibarat menerobos masuk ke dalam gang secara lurus terus sampai mentok (ujung). Kalau buntu, baru mundur. Komputer mencatat rute ini dengan sistem <strong>Tumpukan Barang (Stack)</strong>. Barang yang ditumpuk terakhir di posisi paling atas, harus diambil duluan jika ingin membongkar susunannya (Keluar mundur).
+            Berbeda dengan BFS yang menyebar, DFS itu ibarat menerobos masuk ke dalam gang secara lurus terus sampai mentok (ujung). Kalau buntu, baru mundur. Komputer mencatat rute ini dengan sistem <strong>Tumpukan Barang (Stack)</strong>. Barang yang ditumpuk terakhir di posisi paling atas, harus diambil duluan jika ingin mundur / membongkar susunannya (Keluar mundur).
         </div>
 
         <div class="visual-box">
-            <div class="visual-title">Animasi Tumpukan Barang (Last-In, First-Out)</div>
+            <div class="visual-title">Animasi Pencarian Mendalam (DFS)</div>
             
-            <div class="dfs-stage">
-                <!-- SVG Stikman Stack -->
-                <div class="dfs-sm">
-                    <svg viewBox="0 0 80 80" width="100%" height="100%">
-                        <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
-                        <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        <g class="dfs-arm">
-                            <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
-                        </g>
-                    </svg>
+            <div class="flex-container-layout">
+                <!-- A. Animasi Tumpukan Stack (Kiri) -->
+                <div>
+                    <div style="font-weight:bold; color:#8b5cf6; margin-bottom: 10px; font-size:14px;">1. Memori Tumpukan (Stack)</div>
+                    <div class="dfs-stage">
+                        <div class="dfs-sm">
+                            <svg viewBox="0 0 80 80" width="100%" height="100%">
+                                <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
+                                <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                <g class="dfs-arm">
+                                    <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="s-box sa">Gang A</div>
+                        <div class="s-box sb">Cabang B</div>
+                        <div class="s-box sc">Ujung C</div>
+                    </div>
                 </div>
 
-                <!-- Kotak Stack -->
-                <div class="s-box sa">Gang A</div>
-                <div class="s-box sb">Cabang B</div>
-                <div class="s-box sc">Ujung C</div>
+                <!-- B. Animasi Maze Labirin DFS (Kanan) -->
+                <div>
+                    <div style="font-weight:bold; color:#ef4444; margin-bottom: 10px; font-size:14px;">2. Visualisasi Rute Peta (Kanan Bawah)</div>
+                    <div class="maze-container">
+                        <!-- Labirin Dasar SVG -->
+                        <svg class="maze-svg" viewBox="0 0 150 160">
+                            <!-- Titik Tujuan (Kanan Bawah) -->
+                            <circle cx="110" cy="130" r="10" fill="#10b981" />
+                            <text x="110" y="115" font-size="9" font-weight="bold" fill="#10b981" text-anchor="middle">TUJUAN</text>
+                            
+                            <!-- Gambar Jalanan Labirin Utama (Terputus-putus) -->
+                            <path d="M 75 160 L 75 40" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 75 130 L 110 130" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 75 90 L 40 90" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 40 50 L 40 110" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 40 40 L 110 40" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            <path d="M 110 40 L 110 60" stroke="#cbd5e1" stroke-width="12" fill="none" stroke-linecap="square"/>
+                            
+                            <!-- Indikator Persimpangan (Logo T & Siku) -->
+                            <g stroke="#334155" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="miter">
+                                <!-- T Kanan (75,130) -->
+                                <path d="M 72 124 L 72 136 M 72 130 L 78 130" />
+                                <!-- T Kiri (75,90) -->
+                                <path d="M 78 84 L 78 96 M 78 90 L 72 90" />
+                                <!-- T Kanan (40,90) -->
+                                <path d="M 37 84 L 37 96 M 37 90 L 43 90" />
+                                <!-- T Bawah (75,40) -->
+                                <path d="M 69 37 L 81 37 M 75 37 L 75 43" />
+                                <!-- Siku (110,40) -->
+                                <path d="M 104 37 L 113 37 L 113 46" />
+                            </g>
+
+                            <!-- Indikator Jalan Buntu (Garis Merah Tipis) -->
+                            <g stroke="#ef4444" stroke-width="3" stroke-linecap="round">
+                                <line x1="40" y1="33" x2="40" y2="47" /> <!-- Buntu Kiri Atas -->
+                                <line x1="103" y1="60" x2="117" y2="60" /> <!-- Buntu Bawah Siku -->
+                                <line x1="33" y1="50" x2="47" y2="50" /> <!-- Buntu Atas Kiri -->
+                                <line x1="33" y1="110" x2="47" y2="110" /> <!-- Buntu Bawah Kiri -->
+                            </g>
+                        </svg>
+
+                        <!-- Stikman Merah Menyusuri Labirin -->
+                        <div class="maze-stickman">
+                            <svg viewBox="0 0 80 80" width="100%" height="100%">
+                                <circle cx="40" cy="20" r="10" fill="none" stroke="#ef4444" stroke-width="8"/>
+                                <line x1="40" y1="30" x2="40" y2="55" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="55" x2="20" y2="75" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="55" x2="60" y2="75" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="35" x2="15" y2="50" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                                <line x1="40" y1="35" x2="65" y2="50" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div style="font-size: 13px; color: #64748b; margin-top: 15px;">
-                Stikman menumpuk langkah jalan. Jika bertemu jalan buntu di Ujung C, ia harus mengambil kembali data C (paling atas) terlebih dahulu untuk bisa mundur ke Cabang B.
+            <div style="font-size: 13px; color: #64748b; margin-top: 15px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                Stikman (merah) menelusuri rute labirin dan selalu memprioritaskan mengeksplorasi cabang lurus/kiri lebih dalam terlebih dahulu.<br>Bila bertemu jalan buntu (garis merah tipis), ia akan mengingat langkah sebelumnya di dalam memori Stack dan mundur kembali (backtracking) melewati logo T/Siku untuk mencari cabang lain, hingga tujuan (hijau) berhasil ditemukan.
             </div>
         </div>
 
@@ -811,8 +979,7 @@ if (kalimat.includes("Sakit")) {
             </div>
         </div>
 
-
-        <!-- BAGIAN 7: JEMBATAN DOM (UI) -->
+        <!-- BAGIAN 7: UI -->
         <h2>7. Tombol dan Antarmuka (DOM / UI Logic)</h2>
         <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
         <pre class="pre-simple">let layarTV = document.getElementById("layarOutput");
