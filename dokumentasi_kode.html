@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buku Panduan MedRoute</title>
+    <title>Buku Panduan MedRoute (Pemula)</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; color: #333; max-width: 950px; margin: 0 auto; background: #f8fafc; }
         .doc-container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -16,42 +16,276 @@
         .explanation { background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 20px; margin: 15px 0; border-radius: 8px; }
         .contoh-dasar-teks { font-weight: bold; color: #f59e0b; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
         
-        /* Pre simpel */
+        /* Pre simpel & Dropdown */
         .pre-simple { background: #334155; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #f8fafc; margin-bottom: 20px;}
-        
+        details { background: #f1f5f9; border-radius: 8px; margin-bottom: 30px; border: 1px solid #cbd5e1;}
+        summary { background: #334155; color: white; padding: 15px; font-weight: bold; cursor: pointer; border-radius: 8px; outline: none; transition: 0.3s;}
+        summary:hover { background: #1e293b; }
+        details[open] summary { border-radius: 8px 8px 0 0; }
+        .details-content { padding: 15px; }
+
         /* CSS Untuk Pembedahan Syntax (Kode Asli) */
         .code-box { background: #1e293b; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
         .code-row { display: flex; align-items: stretch; margin-bottom: 12px; }
         .code-row:last-child { margin-bottom: 0; }
         .c-code { flex: 0 0 45%; font-family: 'Courier New', Courier, monospace; color: #f8fafc; font-size: 14px; white-space: pre-wrap; padding-right: 10px; display: flex; align-items: center; }
-        .c-arrow { flex: 0 0 5%; font-size: 24px; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .c-arrow { flex: 0 0 5%; font-size: 18px; text-align: center; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #94a3b8; }
         .c-detail { flex: 0 0 50%; font-size: 14px; color: #334155; padding: 10px 15px; border-radius: 6px; border-left: 5px solid; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
-        /* CSS Untuk Visualisasi Animasi Analog */
-        .visual-box { background: #f1f5f9; border: 2px dashed #cbd5e1; padding: 30px; border-radius: 8px; margin: 15px 0; text-align: center; overflow: hidden;}
+        /* CSS Untuk Visualisasi Animasi */
+        .visual-box { background: #f1f5f9; border: 2px dashed #cbd5e1; padding: 30px; border-radius: 8px; margin: 15px 0; text-align: center; overflow-x: auto;}
         .visual-title { font-weight: bold; color: #475569; margin-bottom: 25px; text-align: center; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
-        .flex-row { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
         
-        /* Animasi BUBBLE SORT */
-        .box-sort { width: 70px; height: 70px; background: #3b82f6; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; position: relative; }
-        .anim-swap-left { animation: swapL 3s infinite alternate ease-in-out; background: #ef4444; }
-        .anim-swap-right { animation: swapR 3s infinite alternate ease-in-out; }
-        @keyframes swapL { 0%, 20% { transform: translateX(0) translateY(0); } 40%, 60% { transform: translateX(42px) translateY(-40px); } 80%, 100% { transform: translateX(85px) translateY(0); } }
-        @keyframes swapR { 0%, 20% { transform: translateX(0) translateY(0); } 40%, 60% { transform: translateX(-42px) translateY(40px); } 80%, 100% { transform: translateX(-85px) translateY(0); } }
+        /* ========================================= */
+        /* 1. ANIMASI BUBBLE SORT (STIKMAN BERPIKIR) */
+        /* ========================================= */
+        .bubble-stage { position: relative; width: 340px; height: 140px; margin: 0 auto; border-bottom: 4px solid #cbd5e1; }
+        
+        /* Kotak Angka */
+        .b-circle { width: 40px; height: 40px; border-radius: 8px; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; position: absolute; bottom: 0; z-index: 2; box-shadow: 0 4px 6px rgba(0,0,0,0.2); left: 0;}
+        
+        .bc_val_3 { animation: b3_anim 24s infinite; }
+        .bc_val_1 { animation: b1_anim 24s infinite; }
+        .bc_val_2 { animation: b2_anim 24s infinite; }
+        .bc_val_5 { animation: b5_anim 24s infinite; }
+        .bc_val_6 { background: #ef4444; animation: b6_anim 24s infinite; }
+        .bc_val_4 { animation: b4_anim 24s infinite; }
 
-        /* Animasi QUEUE (BFS) */
-        .queue-container { display: flex; gap: 10px; background: #e2e8f0; padding: 15px; border-radius: 30px; width: 300px; justify-content: center; overflow: hidden; position: relative; height: 40px;}
-        .q-item { background: #10b981; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; position: absolute; }
-        .anim-q1 { animation: qMove1 4s infinite linear; } .anim-q2 { animation: qMove2 4s infinite linear; } .anim-q3 { animation: qMove3 4s infinite linear; }
-        @keyframes qMove1 { 0% { left: 65%; opacity: 1; } 50% { left: 35%; } 90% { left: 5%; opacity: 1; } 100% { left: -20%; opacity: 0; } }
-        @keyframes qMove2 { 0% { left: 95%; opacity: 0; } 10% { opacity: 1; } 50% { left: 65%; } 100% { left: 35%; opacity: 1; } }
-        @keyframes qMove3 { 0% { left: 125%; opacity: 0; } 50% { left: 95%; opacity: 0; } 60% { opacity: 1; } 100% { left: 65%; opacity: 1; } }
+        /* Wadah Stikman Bubble Sort */
+        .sm-wrapper { position: absolute; bottom: -5px; left: -10px; width: 100px; height: 100px; z-index: 1; animation: stickmanMove 24s infinite; }
+        .arm-l { transform-origin: 50px 45px; animation: armL 24s infinite; }
+        .arm-r { transform-origin: 50px 45px; animation: armR 24s infinite; }
 
-        /* Animasi STACK (DFS) */
-        .stack-container { display: flex; flex-direction: column-reverse; gap: 5px; width: 120px; background: #e2e8f0; padding: 15px; border-radius: 5px 5px 0 0; border-bottom: 8px solid #475569; margin: 0 auto; height: 150px; justify-content: flex-start; position: relative;}
-        .s-item { background: #8b5cf6; color: white; padding: 10px; text-align: center; border-radius: 4px; width: 100px; font-weight: bold; position: absolute; bottom: 15px; left: 10px; }
-        .anim-s1 { bottom: 15px; } .anim-s2 { bottom: 65px; } .anim-s3 { animation: stackInOut 3s infinite ease-in-out; }
-        @keyframes stackInOut { 0% { bottom: 180px; opacity: 0; } 30%, 70% { bottom: 115px; opacity: 1; } 100% { bottom: 180px; opacity: 0; } }
+        /* Keyframe Stikman: Memeriksa barisan 2 kali */
+        @keyframes stickmanMove {
+            0%, 7.5% { transform: translateX(0); opacity: 1; }
+            8.33%, 15.5% { transform: translateX(60px); opacity: 1; }
+            16.66%, 23.5% { transform: translateX(120px); opacity: 1; }
+            25%, 32.5% { transform: translateX(180px); opacity: 1; }
+            33.33%, 40.5% { transform: translateX(240px); opacity: 1; }
+            41%, 49% { transform: translateX(240px); opacity: 0; } 
+            50%, 57.5% { transform: translateX(0); opacity: 1; }
+            58.33%, 65.5% { transform: translateX(60px); opacity: 1; }
+            66.66%, 73.5% { transform: translateX(120px); opacity: 1; }
+            75%, 82.5% { transform: translateX(180px); opacity: 1; }
+            83.33%, 90.5% { transform: translateX(240px); opacity: 1; }
+            91%, 100% { transform: translateX(240px); opacity: 0; }
+        }
+
+        /* Lengan Kiri */
+        @keyframes armL {
+            0%, 0.9% { transform: rotate(0deg); }
+            1%, 6% { transform: rotate(140deg); }
+            7%, 8.9% { transform: rotate(0deg); }
+            9.33%, 14.33% { transform: rotate(140deg); }
+            15.33%, 17.5% { transform: rotate(0deg); }
+            17.66%, 22.66% { transform: rotate(140deg); }
+            23.66%, 25.9% { transform: rotate(0deg); }
+            26%, 31% { transform: rotate(140deg); }
+            32%, 34.2% { transform: rotate(0deg); }
+            34.33%, 39.33% { transform: rotate(140deg); }
+            40.33%, 50.9% { transform: rotate(0deg); }
+            51%, 56% { transform: rotate(140deg); }
+            57%, 59.2% { transform: rotate(0deg); }
+            59.33%, 64.33% { transform: rotate(140deg); }
+            65.33%, 67.5% { transform: rotate(0deg); }
+            67.66%, 72.66% { transform: rotate(140deg); }
+            73.66%, 75.9% { transform: rotate(0deg); }
+            76%, 81% { transform: rotate(140deg); }
+            82%, 84.2% { transform: rotate(0deg); }
+            84.33%, 89.33% { transform: rotate(140deg); }
+            90.33%, 100% { transform: rotate(0deg); }
+        }
+
+        /* Lengan Kanan */
+        @keyframes armR {
+            0%, 0.9% { transform: rotate(0deg); }
+            1%, 6% { transform: rotate(-140deg); }
+            7%, 8.9% { transform: rotate(0deg); }
+            9.33%, 14.33% { transform: rotate(-140deg); }
+            15.33%, 17.5% { transform: rotate(0deg); }
+            17.66%, 22.66% { transform: rotate(-140deg); }
+            23.66%, 25.9% { transform: rotate(0deg); }
+            26%, 31% { transform: rotate(-140deg); }
+            32%, 34.2% { transform: rotate(0deg); }
+            34.33%, 39.33% { transform: rotate(-140deg); }
+            40.33%, 50.9% { transform: rotate(0deg); }
+            51%, 56% { transform: rotate(-140deg); }
+            57%, 59.2% { transform: rotate(0deg); }
+            59.33%, 64.33% { transform: rotate(-140deg); }
+            65.33%, 67.5% { transform: rotate(0deg); }
+            67.66%, 72.66% { transform: rotate(-140deg); }
+            73.66%, 75.9% { transform: rotate(0deg); }
+            76%, 81% { transform: rotate(-140deg); }
+            82%, 84.2% { transform: rotate(0deg); }
+            84.33%, 89.33% { transform: rotate(-140deg); }
+            90.33%, 100% { transform: rotate(0deg); }
+        }
+
+        /* Pergerakan Kotak Angka (3, 1, 2, 5, 6, 4) */
+        @keyframes b3_anim {
+            0%, 0.9% { transform: translate(0, 0); opacity: 1; }
+            1% { transform: translate(0, -45px); }
+            4%, 6% { transform: translate(60px, -45px); }
+            7%, 9.2% { transform: translate(60px, 0); }
+            9.33% { transform: translate(60px, -45px); }
+            12.33%, 14.33% { transform: translate(120px, -45px); }
+            15.33%, 17.5% { transform: translate(120px, 0); }
+            17.66%, 22.66% { transform: translate(120px, -45px); }
+            23.66%, 59.2% { transform: translate(120px, 0); } 
+            59.33%, 64.33% { transform: translate(120px, -45px); } 
+            65.33%, 67.5% { transform: translate(120px, 0); }
+            67.66%, 72.66% { transform: translate(120px, -45px); } 
+            73.66%, 95% { transform: translate(120px, 0); opacity: 1; }
+            96%, 100% { transform: translate(0, 0); opacity: 0; }
+        }
+        @keyframes b1_anim {
+            0%, 0.9% { transform: translate(60px, 0); opacity: 1; }
+            1% { transform: translate(60px, -45px); }
+            4%, 6% { transform: translate(0, -45px); }
+            7%, 50.9% { transform: translate(0, 0); }
+            51%, 56% { transform: translate(0, -45px); }
+            57%, 95% { transform: translate(0, 0); opacity: 1; }
+            96%, 100% { transform: translate(60px, 0); opacity: 0; }
+        }
+        @keyframes b2_anim {
+            0%, 9.2% { transform: translate(120px, 0); opacity: 1; }
+            9.33% { transform: translate(120px, -45px); }
+            12.33%, 14.33% { transform: translate(60px, -45px); }
+            15.33%, 50.9% { transform: translate(60px, 0); }
+            51%, 56% { transform: translate(60px, -45px); }
+            57%, 59.2% { transform: translate(60px, 0); }
+            59.33%, 64.33% { transform: translate(60px, -45px); }
+            65.33%, 95% { transform: translate(60px, 0); opacity: 1; }
+            96%, 100% { transform: translate(120px, 0); opacity: 0; }
+        }
+        @keyframes b5_anim {
+            0%, 17.5% { transform: translate(180px, 0); opacity: 1; }
+            17.66%, 22.66% { transform: translate(180px, -45px); }
+            23.66%, 25.9% { transform: translate(180px, 0); }
+            26%, 31% { transform: translate(180px, -45px); }
+            32%, 67.5% { transform: translate(180px, 0); }
+            67.66%, 72.66% { transform: translate(180px, -45px); }
+            73.66%, 75.9% { transform: translate(180px, 0); }
+            76% { transform: translate(180px, -45px); }
+            79%, 81% { transform: translate(240px, -45px); }
+            82%, 84.2% { transform: translate(240px, 0); }
+            84.33%, 89.33% { transform: translate(240px, -45px); }
+            90.33%, 95% { transform: translate(240px, 0); opacity: 1; }
+            96%, 100% { transform: translate(180px, 0); opacity: 0; }
+        }
+        @keyframes b6_anim {
+            0%, 25.9% { transform: translate(240px, 0); opacity: 1; }
+            26%, 31% { transform: translate(240px, -45px); }
+            32%, 34.2% { transform: translate(240px, 0); }
+            34.33% { transform: translate(240px, -45px); }
+            37.33%, 39.33% { transform: translate(300px, -45px); }
+            40.33%, 84.2% { transform: translate(300px, 0); }
+            84.33%, 89.33% { transform: translate(300px, -45px); }
+            90.33%, 95% { transform: translate(300px, 0); opacity: 1; }
+            96%, 100% { transform: translate(240px, 0); opacity: 0; }
+        }
+        @keyframes b4_anim {
+            0%, 34.2% { transform: translate(300px, 0); opacity: 1; }
+            34.33% { transform: translate(300px, -45px); }
+            37.33%, 39.33% { transform: translate(240px, -45px); }
+            40.33%, 75.9% { transform: translate(240px, 0); }
+            76% { transform: translate(240px, -45px); }
+            79%, 81% { transform: translate(180px, -45px); }
+            82%, 95% { transform: translate(180px, 0); opacity: 1; }
+            96%, 100% { transform: translate(300px, 0); opacity: 0; }
+        }
+
+        /* ========================================= */
+        /* 2. ANIMASI BFS (STIKMAN KASIR/ANTREAN)  */
+        /* ========================================= */
+        .bfs-stage { position: relative; width: 340px; height: 120px; margin: 0 auto; border-bottom: 4px solid #cbd5e1; }
+        .bfs-sm { position: absolute; left: 0; bottom: -5px; width: 80px; height: 80px; }
+        .q-box { width: 60px; height: 35px; background: #10b981; color: white; display: flex; align-items: center; justify-content: center; position: absolute; bottom: 10px; border-radius: 6px; font-weight: bold; font-size:12px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
+        .qa { animation: qa-anim 9s infinite; }
+        .qb { animation: qb-anim 9s infinite; }
+        .qc { animation: qc-anim 9s infinite; }
+
+        @keyframes qa-anim {
+            0%, 5% { left: 100px; opacity: 1; }
+            10%, 20% { left: 45px; opacity: 1; bottom: 10px;}
+            25%, 30% { left: 45px; opacity: 0; bottom: -20px;}
+            31%, 100% { opacity: 0; }
+        }
+        @keyframes qb-anim {
+            0%, 5% { left: 170px; opacity: 1; }
+            10%, 35% { left: 100px; opacity: 1; }
+            40%, 50% { left: 45px; opacity: 1; bottom: 10px;}
+            55%, 60% { left: 45px; opacity: 0; bottom: -20px;}
+            61%, 100% { opacity: 0; }
+        }
+        @keyframes qc-anim {
+            0%, 5% { left: 240px; opacity: 1; }
+            10%, 35% { left: 170px; opacity: 1; }
+            40%, 65% { left: 100px; opacity: 1; }
+            70%, 80% { left: 45px; opacity: 1; bottom: 10px;}
+            85%, 90% { left: 45px; opacity: 0; bottom: -20px;}
+            91%, 100% { opacity: 0; }
+        }
+        .bfs-arm-r { transform-origin: 40px 36px; animation: bfs-arm-anim 9s infinite; }
+        @keyframes bfs-arm-anim {
+            0%, 5% { transform: rotate(0); }
+            10%, 20% { transform: rotate(-50deg); }
+            25%, 35% { transform: rotate(0); }
+            40%, 50% { transform: rotate(-50deg); }
+            55%, 65% { transform: rotate(0); }
+            70%, 80% { transform: rotate(-50deg); }
+            85%, 100% { transform: rotate(0); }
+        }
+
+        /* ========================================= */
+        /* 3. ANIMASI DFS (STIKMAN TUMPUKAN BARANG)  */
+        /* ========================================= */
+        .dfs-stage { position: relative; width: 300px; height: 160px; margin: 0 auto; border-bottom: 4px solid #cbd5e1;}
+        .dfs-sm { position: absolute; left: 50px; bottom: -5px; width: 80px; height: 80px; }
+        .s-box { width: 80px; height: 25px; background: #8b5cf6; color: white; display: flex; align-items: center; justify-content: center; position: absolute; left: 130px; border-radius: 4px; font-weight: bold; font-size:12px; opacity: 0; box-shadow: 0 -2px 4px rgba(0,0,0,0.2);}
+        .sa { animation: sa-anim 12s infinite; }
+        .sb { animation: sb-anim 12s infinite; }
+        .sc { animation: sc-anim 12s infinite; }
+
+        @keyframes sa-anim {
+            0%, 5% { bottom: 35px; left: 85px; opacity: 0; }
+            10% { bottom: 35px; left: 85px; opacity: 1; }
+            15%, 85% { bottom: 0px; left: 130px; opacity: 1; }
+            90% { bottom: 35px; left: 85px; opacity: 1; }
+            95%, 100% { opacity: 0; }
+        }
+        @keyframes sb-anim {
+            0%, 20% { bottom: 35px; left: 85px; opacity: 0; }
+            25% { bottom: 35px; left: 85px; opacity: 1; }
+            30%, 70% { bottom: 25px; left: 130px; opacity: 1; } 
+            75% { bottom: 35px; left: 85px; opacity: 1; }
+            80%, 100% { opacity: 0; }
+        }
+        @keyframes sc-anim {
+            0%, 35% { bottom: 35px; left: 85px; opacity: 0; }
+            40% { bottom: 35px; left: 85px; opacity: 1; }
+            45%, 55% { bottom: 50px; left: 130px; opacity: 1; }
+            60% { bottom: 35px; left: 85px; opacity: 1; }
+            65%, 100% { opacity: 0; }
+        }
+
+        .dfs-arm { transform-origin: 40px 36px; animation: dfs-arm-anim 12s infinite; }
+        @keyframes dfs-arm-anim {
+            0%, 5% { transform: rotate(0); }
+            10%, 15% { transform: rotate(-25deg); } 
+            15%, 20% { transform: rotate(0); }
+            25%, 30% { transform: rotate(-50deg); } 
+            30%, 35% { transform: rotate(0); }
+            40%, 45% { transform: rotate(-75deg); } 
+            45%, 50% { transform: rotate(0); }
+            55%, 60% { transform: rotate(-75deg); } 
+            60%, 65% { transform: rotate(0); }
+            70%, 75% { transform: rotate(-50deg); } 
+            75%, 80% { transform: rotate(0); }
+            85%, 90% { transform: rotate(-25deg); } 
+            90%, 100% { transform: rotate(0); }
+        }
 
         /* RESPONSIVE MOBILE */
         @media (max-width: 600px) {
@@ -59,26 +293,183 @@
             .doc-container { padding: 15px; }
             h1 { font-size: 22px; }
             h2 { font-size: 18px; }
-            
-            /* Code Responsiveness */
             .code-row { flex-direction: column; align-items: stretch; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; margin-bottom: 20px;}
             .c-code { width: 100%; padding-right: 0; margin-bottom: 5px;}
-            .c-arrow { transform: rotate(90deg); margin: 5px auto 10px auto; font-size: 24px;}
+            .c-arrow { transform: rotate(90deg); margin: 5px auto 10px auto;}
             .c-detail { width: 100%; }
-            
-            /* Visual Responsiveness */
-            .flex-row { flex-direction: column; text-align: center; }
             .visual-box { padding: 15px; }
-            .queue-container { width: 100%; max-width: 250px; }
         }
     </style>
 </head>
 <body>
     <div class="doc-container">
         
-        <div class="label-js">⚠️ APLIKASI INI DIPROGRAM MENGGUNAKAN BAHASA: JAVASCRIPT</div>
+        <div class="label-js">[ PERHATIAN ] APLIKASI INI DIPROGRAM MENGGUNAKAN BAHASA: JAVASCRIPT</div>
         
         <h1>Panduan Syntax Kode</h1>
+
+        <!-- BAGIAN TAMBAHAN DARI PENGGUNA: FULL CODE JAVASCRIPT -->
+        <details>
+            <summary>KLIK UNTUK MELIHAT FULL SOURCE CODE JAVASCRIPT</summary>
+            <div class="details-content">
+<pre class="pre-simple" style="margin-bottom: 0;"><code>// 1. DATA RUMAH SAKIT
+const dataFaskes = [
+    { id: "N1", nama: "RSUD Pasar Minggu", jarak: 0.85, layanan: ["IGD", "ICU", "MRI", "Radiologi", "MCU", "Laboratorium"] },
+    { id: "N2", nama: "Aji Waras Klinik", jarak: 1.8, layanan: ["Poli Umum", "Laboratorium", "Radiologi", "USG", "Apotek"] },
+    { id: "N3", nama: "Lamina Hospital", jarak: 3.1, layanan: ["MRI", "Radiologi", "MCU", "Laboratorium", "CT SCAN", "X-Ray"] },
+    { id: "N4", nama: "Kemang Medical Care Hospital", jarak: 2.1, layanan: ["IGD", "ICU", "HCU", "NICU", "Radiologi", "Laboratorium", "Apotek"] },
+    { id: "N5", nama: "RS Murni Teguh Pejaten", jarak: 2.3, layanan: ["IGD", "ICU", "Radiologi", "Laboratorium", "Rehabilitasi"] },
+    { id: "N6", nama: "RS Jakarta Medical Center", jarak: 3.4, layanan: ["IGD", "ICU", "Radiologi", "Laboratorium", "Apotek"] },
+    { id: "N7", nama: "RSUD Jagakarsa", jarak: 3.5, layanan: ["IGD", "Radiologi", "MCU", "Laboratorium"] },
+    { id: "N8", nama: "RS Marinir Cilandak", jarak: 6, layanan: ["IGD", "ICU", "Radiologi", "MCU", "Laboratorium"] },
+    { id: "N9", nama: "RSUD Jati Padang", jarak: 3.5, layanan: ["IGD", "Radiologi", "MCU", "Laboratorium", "Apotek"] }
+];
+
+const kamusNama = {
+    "N0": "UNSIA", "N1": "RSUD Pasar Minggu", "N2": "Aji Waras Klinik", "N3": "Lamina Hospital", 
+    "N4": "Kemang Medical Care", "N5": "RS Murni Teguh", "N6": "RS JMC", "N7": "RSUD Jagakarsa", 
+    "N8": "RS Marinir", "N9": "RSUD Jati Padang",
+    "J1": "Jl. Harsono RM", "J2": "Jl. TB Simatupang", "J3": "Jl. Raya Cilandak KKO",
+    "J4": "Jl. Ampera Raya", "J5": "Jl. Warung Jati Barat", "J6": "Jl. Hajjah Tutti Alawiyah",
+    "J7": "Jl. Saco Ragunan", "J8": "Jl. Intan RSPP", "J9": "Jl. Raya Ragunan"
+};
+
+// 2. STRUKTUR GRAPH
+const graphPeta = {
+    "N0": ["J1"], 
+    "J1": ["N0", "J2", "J5", "J7"],
+    "J2": ["J1", "N1", "J3", "J4", "J8"], 
+    "N1": ["J2"], 
+    "J3": ["J2", "N2"], 
+    "N2": ["J3"],
+    "J4": ["J2", "N4"], 
+    "N4": ["J4"],
+    "J8": ["J2", "N8"], 
+    "N8": ["J8"],
+    "J5": ["J1", "N5", "N3", "J6", "J9"], 
+    "N5": ["J5"],
+    "N3": ["J5"],
+    "J6": ["J5", "N6"], 
+    "N6": ["J6"],
+    "J9": ["J5", "N9"], 
+    "N9": ["J9"],
+    "J7": ["J1", "N7"], 
+    "N7": ["J7"]
+};
+
+for (let key in graphPeta) graphPeta[key].sort();
+
+// 3. ALGORITMA PENCARIAN (LINEAR SEARCH)
+function searchingLayanan(kataKunci) {
+    return dataFaskes.filter(rs =&gt; 
+        rs.layanan.some(l =&gt; l.toLowerCase().includes(kataKunci.toLowerCase())) ||
+        rs.nama.toLowerCase().includes(kataKunci.toLowerCase())
+    );
+}
+
+// 4. ALGORITMA PENGURUTAN (BUBBLE SORT)
+function sortingJarak(arrayData) {
+    let arr = [...arrayData];
+    for (let i = 0; i &lt; arr.length; i++) {
+        for (let j = 0; j &lt; arr.length - 1; j++) {
+            if (arr[j].jarak &gt; arr[j + 1].jarak) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+// 5. ALGORITMA TRAVERSAL (BFS &amp; DFS - Tetap Simpel)
+function ruteBFS(start, target) {
+    let antrean = [[start]];
+    let dikunjungi = new Set([start]);
+    let logPencarian = []; 
+
+    while (antrean.length &gt; 0) {
+        let jalur = antrean.shift();
+        let nodeSekarang = jalur[jalur.length - 1];
+        
+        logPencarian.push(nodeSekarang); // Catat jejak
+
+        if (nodeSekarang === target) {
+            return { ruteAsli: jalur, jejakVisual: logPencarian };
+        }
+
+        let tetangga = graphPeta[nodeSekarang] || [];
+        for (let t of tetangga) {
+            if (!dikunjungi.has(t)) {
+                dikunjungi.add(t);
+                antrean.push([...jalur, t]);
+            }
+        }
+    }
+    return null;
+}
+
+function ruteDFS(start, target, dikunjungi = new Set(), jalur = [], logPencarian = []) {
+    dikunjungi.add(start);
+    jalur.push(start);
+    logPencarian.push(start); // Catat jejak
+
+    if (start === target) {
+        return { ruteAsli: jalur, jejakVisual: logPencarian };
+    }
+
+    let tetangga = graphPeta[start] || [];
+    for (let t of tetangga) {
+        if (!dikunjungi.has(t)) {
+            let hasilJalur = ruteDFS(t, target, dikunjungi, [...jalur], logPencarian);
+            if (hasilJalur) {
+                return hasilJalur;
+            }
+        }
+    }
+    return null;
+}
+
+// 6. LOGIKA ANTARMUKA UI 
+const box = document.getElementById("outputBox");
+let animasiSedangBerjalan = false;
+
+function pemicuCari() {
+    const keyword = document.getElementById("inputCari").value;
+    const hasil = searchingLayanan(keyword);
+    if(hasil.length === 0) {
+        box.innerHTML = `[Searching] "${keyword}" tidak ditemukan.`;
+    } else {
+        box.innerHTML = `[Searching] Ditemukan ${hasil.length} Faskes:&lt;br&gt;` + 
+            hasil.map(rs =&gt; `- ${rs.nama}`).join('&lt;br&gt;');
+    }
+}
+
+function pemicuUrut() {
+    const hasilUrut = sortingJarak(dataFaskes);
+    box.innerHTML = "[Sorting] Urutan Faskes Terdekat:&lt;br&gt;" + 
+        hasilUrut.map((rs, idx) =&gt; `${idx + 1}. ${rs.nama} (Jarak: ${rs.jarak} Km)`).join('&lt;br&gt;');
+}
+
+function pemicuNavigasi(metode) {
+    if (animasiSedangBerjalan) return;
+
+    const tujuan = document.getElementById("pilihTujuan").value;
+    const namaTujuan = kamusNama[tujuan];
+    let hasilCari = metode === 'BFS' ? ruteBFS("N0", tujuan) : ruteDFS("N0", tujuan);
+
+    if (hasilCari) {
+        box.innerHTML = `&lt;strong&gt;[Metode ${metode}]&lt;/strong&gt;&lt;br&gt;Sedang menyimulasikan algoritma di peta...`;
+        // Oper operan data ke mesin animasi yang terpisah di bawah
+        mainkanAnimasiPeta(hasilCari.jejakVisual, hasilCari.ruteAsli, metode, namaTujuan);
+    } else {
+        box.innerHTML = `[Metode ${metode}] Rute tidak ditemukan.`;
+    }
+}
+</code></pre>
+            </div>
+        </details>
+
         <p style="text-align: center; color: #64748b;">Setiap konsep di bawah ini dilengkapi contoh logika dasar, barisan kode asli beserta anak panah rincian</p>
 
         <!-- BAGIAN 1: ARRAY -->
@@ -98,28 +489,28 @@ let siswa = { nama: "Budi", umur: 20 };</pre>
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">const dataFaskes = [</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     <b>const</b>: Membuat variabel yang tidak boleh dihapus.<br><b>[ ]</b>: Menandakan tipe data berbentuk <b>Array</b> (Daftar).
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  { nama: "RSUD Pasar Minggu", jarak: 0.85 },</div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     <b>{ }</b>: Membuka data <b>Object</b>. Kita menyimpan data nama (teks) dan data jarak (angka) rumah sakit ke-1.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  { nama: "Aji Waras Klinik", jarak: 1.8 }</div>
-                <div class="c-arrow" style="color: #c4b5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #c4b5fd; background: #f5f3ff;">
                     Data rumah sakit ke-2. Tiap object selalu dipisahkan oleh tanda koma (,).
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">];</div>
-                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
                     Tanda tutup kurung siku <b>]</b> menandakan daftar rumah sakit telah ditutup/selesai.
                 </div>
@@ -141,21 +532,21 @@ let siswa = { nama: "Budi", umur: 20 };</pre>
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">const graphPeta = {</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     Membuka Object utama khusus untuk menyimpan kerangka peta rute persimpangan.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  "J1": ["N0", "J2", "J5", "J7"]</div>
-                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
                     <b>"J1"</b> adalah kunci posisi berdiri sekarang. Di sebelah kanannya adalah Array tujuan lokasi persimpangan yang nyambung (terhubung) ke J1.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">};</div>
-                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
                     Tanda tutup Object peta.
                 </div>
@@ -177,80 +568,109 @@ if (kalimat.includes("Sakit")) {
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">function searchingLayanan(kataKunci) {</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     <b>function</b>: Membuka fungsi pencarian. <b>kataKunci</b> adalah tulisan yang diketik oleh pengguna web.
                 </div>
             </div>
             <div class="code-row">
-                <div class="c-code">  return dataFaskes.filter(rs => </div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-code">  return dataFaskes.filter(rs =&gt; </div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     <b>.filter()</b>: Mengecek seluruh Array <code>dataFaskes</code> dan membuang yang salah (menyaring data yang benar saja).
                 </div>
             </div>
             <div class="code-row">
-                <div class="c-code">    rs.layanan.some(l => l.includes(kataKunci))</div>
-                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-code">    rs.layanan.some(l =&gt; l.includes(kataKunci))</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
-                    <b>.some() & .includes()</b>: Apakah dari daftar layanan RS ini, ada teks yang <b>mirip (include)</b> dengan kataKunci?
+                    <b>.some() &amp; .includes()</b>: Apakah dari daftar layanan RS ini, ada teks yang <b>mirip (include)</b> dengan kataKunci?
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  );<br>}</div>
-                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
                     Tutup proses penyaringan dan kembalikan hasilnya.
                 </div>
             </div>
         </div>
 
-        <!-- BAGIAN 4: BUBBLE SORT -->
+        <!-- BAGIAN 4: BUBBLE SORT (DIPERBARUI DENGAN STIKMAN BERPIKIR) -->
         <h2>4. Mengurutkan Jarak (Bubble Sort)</h2>
         <div class="contoh-dasar-teks">Contoh Logika Paling Sederhana:</div>
-        <pre class="pre-simple">if (Kotak_Kiri > Kotak_Kanan) {
+        <pre class="pre-simple">if (Kotak_Kiri &gt; Kotak_Kanan) {
     // Tukar posisi mereka berdua!
 }</pre>
 
         <div class="explanation">
-            Komputer membandingkan dua kotak bersebelahan. Kalau kotak KIRI ternyata nilainya lebih JAUH dari kotak KANAN, maka posisi mereka <strong>DITUKAR</strong>. Yang besar (jauh) akan terus ditendang ke arah ujung barisan, mirip gelembung udara di air (Bubble).
+            Komputer membandingkan dua kotak bersebelahan. Kalau kotak KIRI ternyata nilainya lebih besar/berat dari kotak KANAN, maka posisi mereka <strong>DITUKAR</strong>. Yang besar akan terus didorong pelan-pelan ke arah ujung barisan, mirip gelembung udara di air (Bubble).
         </div>
 
         <div class="visual-box">
-            <div class="visual-title">🔴 Animasi Bertukar Posisi (Swap)</div>
-            <div class="flex-row" style="height: 120px;">
-                <div class="box-sort anim-swap-left">5 Km<br><small>(Lebih Jauh)</small></div>
-                <div class="box-sort anim-swap-right" style="background:#10b981;">2 Km<br><small>(Lebih Dekat)</small></div>
+            <div class="visual-title">Animasi Mengurutkan Angka (Bubble Sort)</div>
+            
+            <div class="bubble-stage">
+                <!-- SVG Karakter Stikman Bubble Sort -->
+                <div class="sm-wrapper">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <!-- Kepala -->
+                        <circle cx="50" cy="25" r="10" fill="none" stroke="#475569" stroke-width="4"/>
+                        <!-- Badan -->
+                        <line x1="50" y1="35" x2="50" y2="65" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Kaki -->
+                        <line x1="50" y1="65" x2="35" y2="90" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="50" y1="65" x2="65" y2="90" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Lengan Animasi -->
+                        <g class="arm-l">
+                            <line x1="50" y1="45" x2="25" y2="70" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+                        <g class="arm-r">
+                            <line x1="50" y1="45" x2="75" y2="70" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Enam Lingkaran Angka dengan urutan 3, 1, 2, 5, 6, 4 -->
+                <div class="b-circle bc_val_3">3</div>
+                <div class="b-circle bc_val_1">1</div>
+                <div class="b-circle bc_val_2">2</div>
+                <div class="b-circle bc_val_5">5</div>
+                <div class="b-circle bc_val_6">6</div>
+                <div class="b-circle bc_val_4">4</div>
             </div>
-            <div style="font-size: 12px; color: #64748b; margin-top: 10px;">Perhatikan bagaimana 5 Km (Kiri) yang lebih berat ditukar silang ke Kanan.</div>
+
+            <div style="font-size: 13px; color: #64748b; margin-top: 15px;">
+                Stikman secara bertahap mengangkat dan berhenti sebentar untuk membandingkan 2 angka.<br>Jika angka sebelah kiri lebih besar, maka akan <b>ditukar posisinya</b>. Jika angka sudah benar posisinya, ditaruh kembali.<br>Saat selesai di ujung kanan, stikman kembali ke kiri untuk mengulanginya lagi hingga barisan 1-6 urut sempurna.
+            </div>
         </div>
 
         <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
         <div class="code-box">
             <div class="code-row">
-                <div class="c-code">if (arr[j].jarak > arr[j + 1].jarak) {</div>
-                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-code">if (arr[j].jarak &gt; arr[j + 1].jarak) {</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
-                    <b>if ( > )</b>: Mengecek apakah kotak bagian Kiri (j) jaraknya lebih besar/jauh dari kotak Kanan sebelahnya (j + 1).
+                    <b>if ( &gt; )</b>: Mengecek apakah kotak bagian Kiri (j) jaraknya lebih besar/jauh dari kotak Kanan sebelahnya (j + 1).
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  let temp = arr[j];</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     <b>temp</b>: Variabel kantong cadangan. Mengamankan isi kotak Kiri supaya tidak hilang tertimpa.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  arr[j] = arr[j + 1];</div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     Pindahkan isi kotak Kanan (j + 1) ke tempat/meja kotak Kiri (j).
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  arr[j + 1] = temp;</div>
-                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
                     Pindahkan kembali isi kantong cadangan (temp) ke tempat kotak Kanan. Tukar silang (swap) sukses!
                 </div>
@@ -264,15 +684,31 @@ if (kalimat.includes("Sakit")) {
         </div>
 
         <div class="visual-box">
-            <div class="visual-title">🟢 Animasi Antrean (First-In, First-Out)</div>
-            <div class="flex-row">
-                <div style="font-weight:bold; color:#ef4444; margin: 10px 0;">DICEK DULUAN<br>⬅️ (Keluar Depan)</div>
-                <div class="queue-container">
-                    <div class="q-item anim-q1">Area A</div>
-                    <div class="q-item anim-q2">Area B</div>
-                    <div class="q-item anim-q3" style="background:#3b82f6;">Area C</div>
+            <div class="visual-title">Animasi Antrean Kasir (First-In, First-Out)</div>
+            
+            <div class="bfs-stage">
+                <!-- SVG Stikman Kasir -->
+                <div class="bfs-sm">
+                    <svg viewBox="0 0 80 80" width="100%" height="100%">
+                        <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
+                        <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <g class="bfs-arm-r">
+                            <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+                    </svg>
                 </div>
-                <div style="font-weight:bold; color:#3b82f6; margin: 10px 0;">MASUK ANTRIAN<br>⬅️ (Area Baru Belakang)</div>
+
+                <!-- Kotak Antrean -->
+                <div class="q-box qa">Jalan A</div>
+                <div class="q-box qb">Jalan B</div>
+                <div class="q-box qc">Jalan C</div>
+            </div>
+            
+            <div style="font-size: 13px; color: #64748b; margin-top: 15px;">
+                Stikman mengambil dan memeriksa data rute yang datang lebih awal (paling depan) dari barisan antrean.
             </div>
         </div>
 
@@ -280,28 +716,28 @@ if (kalimat.includes("Sakit")) {
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">let antrean = [[start]];</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     Membuat keranjang Array kosong untuk sistem mengantre, dan langsung memasukkan posisi awal berdiri (start).
                 </div>
             </div>
             <div class="code-row">
-                <div class="c-code">while (antrean.length > 0) {</div>
-                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-code">while (antrean.length &gt; 0) {</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
                     <b>while</b>: Memerintahkan komputer mengulangi pencarian tanpa henti <b>selama</b> antrean tidak kosong.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  let jalur = antrean.shift();</div>
-                <div class="c-arrow" style="color: #f9a8d4;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #f9a8d4; background: #fdf2f8;">
                     <b>.shift()</b>: Mengeluarkan/mencabut rute dari barisan <b>PALING DEPAN</b> untuk dicek apakah itu tujuan kita.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  antrean.push(tetangga);</div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     <b>.push()</b>: Kalau rute tadi salah (belum ketemu), maka temuan persimpangan jalan di depannya dimasukkan ke antrean <b>PALING BELAKANG</b> untuk dicek besok-besok.
                 </div>
@@ -311,18 +747,35 @@ if (kalimat.includes("Sakit")) {
         <!-- BAGIAN 6: DEPTH-FIRST SEARCH (DFS) -->
         <h2>6. Pencarian Mendalam (DFS - Depth First Search)</h2>
         <div class="explanation">
-            Berbeda dengan BFS yang menyebar, DFS itu ibarat menerobos masuk ke dalam gang secara lurus terus sampai mentok (ujung). Kalau buntu, baru mundur. Komputer mencatat rute ini dengan sistem <strong>Tumpukan Piring (Stack)</strong>. Piring yang ditumpuk terakhir di atas, akan diambil duluan (Keluar mundur).
+            Berbeda dengan BFS yang menyebar, DFS itu ibarat menerobos masuk ke dalam gang secara lurus terus sampai mentok (ujung). Kalau buntu, baru mundur. Komputer mencatat rute ini dengan sistem <strong>Tumpukan Barang (Stack)</strong>. Barang yang ditumpuk terakhir di posisi paling atas, harus diambil duluan jika ingin membongkar susunannya (Keluar mundur).
         </div>
 
         <div class="visual-box">
-            <div class="visual-title">🟣 Animasi Tumpukan Piring (Last-In, First-Out)</div>
-            <div class="flex-row">
-                <div style="font-weight:bold; color:#8b5cf6; text-align:right;">Maju Terus (Masuk Piring) ⬇️<br><br>Mundur Buntu (Ambil Piring) ⬆️</div>
-                <div class="stack-container">
-                    <div class="s-item anim-s1">Jalan A</div>
-                    <div class="s-item anim-s2">Jalan B</div>
-                    <div class="s-item anim-s3" style="background:#ef4444;">Ujung Gang C</div>
+            <div class="visual-title">Animasi Tumpukan Barang (Last-In, First-Out)</div>
+            
+            <div class="dfs-stage">
+                <!-- SVG Stikman Stack -->
+                <div class="dfs-sm">
+                    <svg viewBox="0 0 80 80" width="100%" height="100%">
+                        <circle cx="40" cy="20" r="8" fill="none" stroke="#475569" stroke-width="4"/>
+                        <line x1="40" y1="28" x2="40" y2="52" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="52" x2="28" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="52" x2="52" y2="72" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="40" y1="36" x2="20" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        <g class="dfs-arm">
+                            <line x1="40" y1="36" x2="60" y2="56" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+                        </g>
+                    </svg>
                 </div>
+
+                <!-- Kotak Stack -->
+                <div class="s-box sa">Gang A</div>
+                <div class="s-box sb">Cabang B</div>
+                <div class="s-box sc">Ujung C</div>
+            </div>
+
+            <div style="font-size: 13px; color: #64748b; margin-top: 15px;">
+                Stikman menumpuk langkah jalan. Jika bertemu jalan buntu di Ujung C, ia harus mengambil kembali data C (paling atas) terlebih dahulu untuk bisa mundur ke Cabang B.
             </div>
         </div>
 
@@ -330,30 +783,30 @@ if (kalimat.includes("Sakit")) {
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">function ruteDFS(titikAwal) {</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     Membuka fungsi DFS untuk pertama kalinya (misalnya saat klik tombol).
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  for (let t of tetangga) {</div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     <b>for</b>: Memutar roda untuk memeriksa jalan cabang di persimpangan ini satu-satu.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">    let hasil = ruteDFS(t);</div>
-                <div class="c-arrow" style="color: #fde047;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fde047; background: #fefce8;">
                     <b>REKURSIF</b>: Ini ajaib. Fungsi ini ternyata memanggil namanya <i>sendiri</i> dari dalam untuk masuk ke cabang gang yang barusan ditemukan. Proses lurus akan terus menumpuk di atas.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  }<br>  return null;</div>
-                <div class="c-arrow" style="color: #fca5a5;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fca5a5; background: #fef2f2;">
-                    Jika masuk perulangan ternyata buntu, kembalikan <b>null</b> (kosong). Saat menerima 'null', komputer akan otomatis mundur 1 langkah ke atas tumpukan piring untuk mengecek gang cabang lainnya.
+                    Jika masuk perulangan ternyata buntu, kembalikan <b>null</b> (kosong). Saat menerima 'null', komputer akan otomatis mundur 1 langkah ke atas tumpukan barang untuk mengecek gang cabang lainnya.
                 </div>
             </div>
         </div>
@@ -368,28 +821,28 @@ if (kalimat.includes("Sakit")) {
 layarTV.innerHTML = "Tombol Berhasil Ditekan!";</pre>
 
         <div class="explanation">
-            JavaScript membutuhkan jembatan untuk bisa berinteraksi dengan layar web HTML. <code>getElementById</code> ibarat *remote control*. Saat Anda memencet tombol, JavaScript membalasnya dengan mencetak tulisan ke layar melalui syntax <code>innerHTML</code>.
+            JavaScript membutuhkan jembatan untuk bisa berinteraksi dengan layar web HTML. <code>getElementById</code> ibarat sebuah remote control. Saat Anda memencet tombol, JavaScript membalasnya dengan mencetak tulisan ke layar melalui syntax <code>innerHTML</code>.
         </div>
 
         <div class="contoh-dasar-teks">Pembedahan Syntax Kode Asli:</div>
         <div class="code-box">
             <div class="code-row">
                 <div class="c-code">const box = document.getElementById("outputBox");</div>
-                <div class="c-arrow" style="color: #93c5fd;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #93c5fd; background: #eff6ff;">
                     <b>getElementById</b>: JavaScript mencari kotak di HTML yang memiliki ID `outputBox` dan mengendalikannya memakai remote bernama <code>box</code>.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">function pemicuUrut() {</div>
-                <div class="c-arrow" style="color: #fdba74;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #fdba74; background: #fff7ed;">
                     Fungsi ini akan tertembak (terpicu) ketika tombol 'Urutkan' ditekan di layar web.
                 </div>
             </div>
             <div class="code-row">
                 <div class="c-code">  box.innerHTML = "Berhasil Diurutkan!";<br>}</div>
-                <div class="c-arrow" style="color: #86efac;">➔</div>
+                <div class="c-arrow">-&gt;</div>
                 <div class="c-detail" style="border-left-color: #86efac; background: #f0fdf4;">
                     <b>.innerHTML</b>: Kita menggunakan remote `box` untuk menuliskan teks langsung masuk ke dalam layar website secara real-time.
                 </div>
@@ -397,7 +850,7 @@ layarTV.innerHTML = "Tombol Berhasil Ditekan!";</pre>
         </div>
         
         <p style="text-align: center; color: #64748b; margin-top: 50px; font-weight: bold; border-top: 1px dashed #cbd5e1; padding-top: 20px;">
-            Note: "Visual Peta 2D" sengaja tidak dibahas karena berada di luar materi struktur data dan murni berfungsi sebagai visualisasi metode DFS dan BFS.
+            Note: Visual Peta 2D sengaja tidak dibahas karena berada di luar materi struktur data dan murni berfungsi sebagai visualisasi metode DFS dan BFS.
         </p>
 
     </div>
